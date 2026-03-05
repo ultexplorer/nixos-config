@@ -119,5 +119,15 @@ services.blueman.enable = true;
 boot.kernel.sysctl = {
   "vm.swappiness" = 15;
 };
+###################################################
+console = {
+    # Указываем пакет, где лежит шрифт
+    packages = [ pkgs.terminus_font ];
+    # Имя файла шрифта без расширения (ter-132n — это как раз оно)
+    font = "ter-132n";
+    # Если хочешь, чтобы в консоли работали горячие клавиши (опционально)
+    useXkbConfig = true; 
+  };
+
 
 }
