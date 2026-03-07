@@ -4,40 +4,35 @@
   imports = [
     ./hardware-configuration.nix
   ];
-  
-   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-   
-   system.stateVersion = "25.11";
+
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  system.stateVersion = "25.11";
+
   # ===============================
   # Bootloader (UEFI)
   # ===============================
+
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelParams = [
-  "threadirqs"
-  #"mitigations=off"
-  ];
 
+  boot.kernelParams = [
+    "threadirqs"
+    # "mitigations=off"
+  ];
 
   # ===============================
   # Network
   # ===============================
+
   networking.networkmanager.enable = true;
 
   # ===============================
-  # Graphics Stack (AMD Ryzen safest setup)
+  # Graphics Stack
   # ===============================
 
   services.xserver.enable = true;
 
-  ##############################################wayfire
-  services.displayManager.sessionPackages = with pkgs; [
-  wayfire
-  ];
- 
-  ###################################################
-
-  # modesetting is the most stable driver for Ryzen laptops
   services.xserver.videoDrivers = [ "modesetting" ];
 
   hardware.graphics = {
@@ -58,12 +53,19 @@
   services.xserver.desktopManager.xfce.enable = true;
 
   # ===============================
-  # Power Management (important for ThinkPad Ryzen)
+  # Wayfire (если хочешь запускать как сессию)
+  # ===============================
+
+  services.displayManager.sessionPackages = with pkgs; [
+    wayfire
+  ];
+
+  # ===============================
+  # Power Management
   # ===============================
 
   services.power-profiles-daemon.enable = true;
 
-  # Prevent aggressive suspend issues
   services.logind.settings = {
     Login = {
       HandleLidSwitch = "suspend";
@@ -71,8 +73,10 @@
     };
   };
 
+  services.upower.enable = true;
+
   # ===============================
-  # User Setup
+  # Users
   # ===============================
 
   users.users.me = {
@@ -87,47 +91,60 @@
   };
 
   security.sudo.enable = true;
-  
-  # ===============================
-  services.upower.enable = true;
-  #================================
 
   # ===============================
-  # Base packages
+  # Packages
   # ===============================
 
   environment.systemPackages = with pkgs; [
+    mc
+    links2
     wayfire
     pciutils
     edid-decode
     nixpkgs-fmt
-    libva-utils 
+    libva-utils
     git
     vim
   ];
-# -----------------------------
-# Bluetooth
-# -----------------------------
 
-hardware.bluetooth = {
-  enable = true;
-  powerOnBoot = true;
-};
+  # ===============================
+  # Bluetooth
+  # ===============================
 
-services.blueman.enable = true;
-
-boot.kernel.sysctl = {
-  "vm.swappiness" = 15;
-};
-###################################################
-console = {
-    # Указываем пакет, где лежит шрифт
-    packages = [ pkgs.terminus_font ];
-    # Имя файла шрифта без расширения (ter-132n — это как раз оно)
-    font = "ter-132n";
-    # Если хочешь, чтобы в консоли работали горячие клавиши (опционально)
-    useXkbConfig = true; 
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
   };
 
+  services.blueman.enable = true;
+
+  # ===============================
+  # Kernel tuning
+  # ===============================
+
+  boot.kernel.sysctl = {
+    "vm.swappiness" = 15;
+  };
+
+  # ===============================
+  # Console
+  # ===============================
+
+  console = {
+    font = "ter-v32n";
+    packages = [ pkgs.terminus_font ];
+    keyMap = "us";
+  };
+
+  # ===============================
+  # Fonts
+  # ===============================
+
+  fonts.packages = with pkgs; [
+    terminus_font
+    noto-fonts
+    noto-fonts-color-emoji
+  ];
 
 }

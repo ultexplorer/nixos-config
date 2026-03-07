@@ -2,6 +2,8 @@
 
 {
   home.packages = with pkgs; [
+    foot
+
     wayfirePlugins.wcm
     firefox
     waybar
@@ -9,6 +11,9 @@
     swaybg
     wl-clipboard
     cliphist
+    
+    mako
+    grim
   ];
 
   home.file.".config/waybar/config.jsonc".text = ''
@@ -41,5 +46,28 @@
   }
 '';
   
-}
+  home.file.".config/wayfire.ini".text = ''
+    [core]
+    plugins = autostart command move resize grid place expo vswitch window-rules
+    close_top_view = <super> KEY_Q
+
+    [command]
+    # Теперь используем Super + T для foot
+    binding_terminal = <super> KEY_T
+    command_terminal = foot
+
+    [move]
+    activate = <super> BTN_LEFT
+
+    [resize]
+    activate = <super> BTN_RIGHT
+    [autostart]
+    bar = waybar
+    wallpaper = swaybg -m fill -i /path/to/your/image.jpg
+    # Если хочешь, чтобы при старте сразу работал буфер обмена:
+    clipboard = wl-paste --watch cliphist store
+  '';
+}  
+
+
 
