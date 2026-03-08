@@ -44,13 +44,13 @@
   # ===============================
   # Display Manager
   # ===============================
+ 
+  services.displayManager = {
+  lightdm.enable = false;
+  gdm.enable = true;
+  defaultSession = "xfce";
+};
 
-  services.displayManager.lightdm.enable = false;
-  # Включаем GDM
-  services.displayManager.gdm.enable = true;
-
-  # Опционально: задать default session
-  services.xserver.displayManager.defaultSession = "xfce";
 
   # ===============================
   # Desktop Environment
