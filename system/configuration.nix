@@ -103,22 +103,8 @@
   # ===============================
 
   environment.systemPackages = with pkgs; [
-    tree
-    smartmontools
-    lm_sensors
-    powertop
-    htop
-    w3m
-    mc
-    links2
-    aerc
-    wayfire
-    pciutils
-    edid-decode
+    wayfire 
     nixpkgs-fmt
-    libva-utils
-    git
-    vim
   ];
 
   # ===============================

@@ -6,6 +6,10 @@
   imports = [
     ./xfce.nix
     ./wayfire.nix
+    ../modules/home/apps/cli.nix
+    ../modules/home/apps/gui.nix
+    ../modules/home/apps/dev.nix
+    ../modules/home/fonts.nix
   ];
 
   fonts.fontconfig.enable = true;
@@ -14,17 +18,5 @@
   LIBVA_DRIVER_NAME = "radeonsi";
   MOZ_DISABLE_RDD_SANDBOX = "1";
 };
-
-  home.packages = with pkgs; [
-    pavucontrol
-    inter
-    noto-fonts
-    noto-fonts-cjk-sans
-    noto-fonts-color-emoji
-    freetube
-    mpv
-    yt-dlp
-  ];
-  ###########################
 
 }
