@@ -32,8 +32,6 @@
   # Graphics Stack
   # ===============================
 
-  services.xserver.enable = true;
-
   services.xserver.videoDrivers = [ "modesetting" ];
 
   hardware.graphics = {
@@ -48,12 +46,16 @@
   services.xserver = {
   enable = true;
 
-    displayManager = {
-      lightdm.enable = false;
-      gdm.enable = true;
-      defaultSession = "xfce";
-    };
-  }; 
+  videoDrivers = [ "modesetting" ];
+
+  displayManager = {
+    lightdm.enable = false;
+    gdm.enable = true;
+    defaultSession = "xfce";
+  };
+
+  desktopManager.xfce.enable = true;
+  };
 
   # ===============================
   # Desktop Environment
