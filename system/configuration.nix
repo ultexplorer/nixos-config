@@ -44,12 +44,16 @@
   # ===============================
   # Display Manager
   # ===============================
+
+  services.xserver.displayManager.lightdm.enable = false;
+
+  services.displayManager.gdm = {
+    enable = true;
+  };
+
+  services.xserver.displayManager.defaultSession = "xfce";  
  
-  services.displayManager = {
-  lightdm.enable = false;
-  gdm.enable = true;
-  defaultSession = "xfce";
-};
+  };
 
 
   # ===============================
