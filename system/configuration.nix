@@ -20,16 +20,19 @@
   # ===============================
   # Graphics Stack & Desktop
   # ===============================
-  services.xserver.enable = true;
-  services.xserver.videoDrivers = [ "modesetting" ];
   
-  # Настройка входа
-  services.displayManager = {
-    gdm.enable = true;
-    defaultSession = "xfce"; # Пока оставляем XFCE основным, чтобы ты точно зашел в систему
+  services.xserver = {
+    enable = true;
+    videoDrivers = [ "modesetting" ];
+    
+    # ВОТ ЗДЕСЬ ИСПРАВЛЕНИЕ: добавили xfce внутрь xserver
+    desktopManager.xfce.enable = true;
+    
+    displayManager.gdm.enable = true;
   };
 
-  services.desktopManager.xfce.enable = true;
+  services.displayManager.defaultSession = "xfce";
+
   
   # Включаем Wayfire правильно
   programs.wayfire.enable = true; 
