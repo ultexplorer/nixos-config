@@ -30,9 +30,9 @@
   # ===============================
   # Graphics Stack
   # ===============================
-  services.xserver = {
-    enable = true;
-    videoDrivers = [ "modesetting" ];
+  services = {
+    xserver.enable = true;
+    xserver.videoDrivers = [ "modesetting" ];
 
     displayManager = {
       lightdm.enable = false;
