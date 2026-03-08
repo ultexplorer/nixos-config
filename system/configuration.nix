@@ -53,8 +53,6 @@
 
   services.xserver.displayManager.defaultSession = "xfce";  
  
-  };
-
 
   # ===============================
   # Desktop Environment
