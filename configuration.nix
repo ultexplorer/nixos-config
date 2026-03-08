@@ -97,8 +97,14 @@
   # ===============================
 
   environment.systemPackages = with pkgs; [
+    smartmontools
+    lm_sensors
+    powertop
+    htop
+    w3m
     mc
     links2
+    aerc
     wayfire
     pciutils
     edid-decode
