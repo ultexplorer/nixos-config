@@ -45,14 +45,15 @@
   # Display Manager
   # ===============================
 
-  services.displayManager.lightdm.enable = false;
+  services.xserver = {
+  enable = true;
 
-  services.displayManager.gdm = {
-    enable = true;
-  };
-
-  services.xserver.displayManager.defaultSession = "xfce";  
- 
+    displayManager = {
+      lightdm.enable = false;
+      gdm.enable = true;
+      defaultSession = "xfce";
+    };
+  }; 
 
   # ===============================
   # Desktop Environment
