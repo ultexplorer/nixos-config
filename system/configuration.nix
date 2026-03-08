@@ -26,10 +26,14 @@
     videoDrivers = [ "modesetting" ];
     
     # ВОТ ЗДЕСЬ ИСПРАВЛЕНИЕ: добавили xfce внутрь xserver
-    desktopManager.xfce.enable = true;
     
-    displayManager.gdm.enable = true;
   };
+
+   services.desktopManager.xfce.enable = true;
+   services.displayManager.gdm.enable = true;
+
+
+
 
   services.displayManager.defaultSession = "xfce";
 
