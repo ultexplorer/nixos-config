@@ -1,48 +1,38 @@
 { config, pkgs, ... }:
 
 {
-  # ===============================
-  # Imports
-  # ===============================
   imports = [
     ./hardware-configuration.nix
   ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  system.stateVersion = "25.11";
+  
+  # ПОПРАВЛЕНО: Ставим актуальную версию (24.11 для стабильной)
+  system.stateVersion = "24.11"; 
 
-  # ===============================
-  # Bootloader (UEFI)
-  # ===============================
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.systemd-boot.configurationLimit = 5;
-  boot.kernelParams = [
-    "threadirqs"
-    # "mitigations=off"
-  ];
+  boot.kernelParams = [ "threadirqs" ];
 
-  # ===============================
-  # Network
-  # ===============================
   networking.networkmanager.enable = true;
 
   # ===============================
-  # Graphics Stack
+  # Graphics Stack & Desktop
   # ===============================
-  services = {
-    xserver.enable = true;
-    xserver.videoDrivers = [ "modesetting" ];
-
-    displayManager = {
-      lightdm.enable = false;
-      gdm.enable = true;
-      defaultSession = "xfce";
-      sessionPackages = with pkgs; [ wayfire ];
-    };
-
-    desktopManager.xfce.enable = true;
+  services.xserver.enable = true;
+  services.xserver.videoDrivers = [ "modesetting" ];
+  
+  # Настройка входа
+  services.displayManager = {
+    gdm.enable = true;
+    defaultSession = "xfce"; # Пока оставляем XFCE основным, чтобы ты точно зашел в систему
   };
+
+  services.desktopManager.xfce.enable = true;
+  
+  # Включаем Wayfire правильно
+  programs.wayfire.enable = true; 
 
   hardware.graphics = {
     enable = true;
@@ -50,62 +40,35 @@
   };
 
   # ===============================
-  # Power Management
+  # Power, Users & Bluetooth
   # ===============================
   services.power-profiles-daemon.enable = true;
-  services.logind.settings = {
-    Login = {
-      HandleLidSwitch = "suspend";
-      HandleLidSwitchDocked = "ignore";
-    };
-  };
   services.upower.enable = true;
 
-  # ===============================
-  # Users
-  # ===============================
   users.users.me = {
     isNormalUser = true;
-    extraGroups = [
-      "wheel"
-      "video"
-      "audio"
-      "networkmanager"
-      "input"
-    ];
+    extraGroups = [ "wheel" "video" "audio" "networkmanager" "input" ];
   };
 
-  # ===============================
-  # Sudo
-  # ===============================
   security.sudo.enable = true;
 
-  # ===============================
-  # Packages
-  # ===============================
   environment.systemPackages = with pkgs; [
-    wayfire
+    # Wayfire уже включен через programs.wayfire.enable
     nixpkgs-fmt
+    git
+    vim
+    mc
+    foot # Терминал для Wayfire, он тебе пригодится
   ];
 
-  # ===============================
-  # Bluetooth
-  # ===============================
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = true;
-  };
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
   services.blueman.enable = true;
 
-  # ===============================
-  # Kernel tuning
-  # ===============================
-  boot.kernel.sysctl = {
-    "vm.swappiness" = 15;
-  };
+  boot.kernel.sysctl = { "vm.swappiness" = 15; };
 
   # ===============================
-  # Console
+  # Console & Fonts
   # ===============================
   console = {
     font = "ter-v32n";
@@ -113,9 +76,6 @@
     keyMap = "us";
   };
 
-  # ===============================
-  # Fonts
-  # ===============================
   fonts.packages = with pkgs; [
     terminus_font
     noto-fonts
