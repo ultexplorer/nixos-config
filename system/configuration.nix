@@ -45,7 +45,7 @@
   # Display Manager
   # ===============================
 
-  services.xserver.displayManager.lightdm.enable = false;
+  services.displayManager.lightdm.enable = false;
 
   services.displayManager.gdm = {
     enable = true;
