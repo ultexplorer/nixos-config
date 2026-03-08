@@ -9,7 +9,7 @@
     ../modules/home/apps/cli.nix
     ../modules/home/apps/gui.nix
     ../modules/home/apps/dev.nix
-    ../modules/home/fonts.nix
+    ../modules/home/apps/fonts.nix
   ];
 
   fonts.fontconfig.enable = true;

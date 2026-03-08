@@ -2,7 +2,8 @@
 
 {
   home.packages = with pkgs; [
-    nerdfonts
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.fira-code
     inter
     jetbrains-mono
     noto-fonts
