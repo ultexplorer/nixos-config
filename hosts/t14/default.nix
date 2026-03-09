@@ -7,6 +7,7 @@ let
     ../modules/desktop/wayfire.nix
   ];
   hmConfig = import ../../home/home.nix
+{ inherit pkgs; };
 in
 {
   # Имя хоста
