@@ -19,16 +19,16 @@
       {
         # Основная конфигурация NixOS
         nixosConfigurations = {
-          t14 = pkgs.lib.nixosSystem {
+          t14 = pkgs.nixosSystem {
             inherit system;
             modules = [
               ./hosts/t14/default.nix
             ];
-            configuration = {}; # optional
+            # configuration = {}; # опционально, не обязательно
           };
         };
 
-        # DevShell
+        # DevShell для разработки
         devShells.${system}.default = import ./devshells/default.nix { inherit pkgs; };
 
         # Home-manager
