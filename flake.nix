@@ -1,5 +1,4 @@
-{
-  description = "NixOS configuration for ThinkPad T14";
+{ description = "NixOS configuration for ThinkPad T14";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -21,7 +20,8 @@
             modules = [
               ./hosts/t14/default.nix
             ];
-            specialArgs = { inherit inputs; };
+            # specialArgs = { inherit inputs; }; <- удаляем или заменяем на self
+            specialArgs = { self; }; # <-- если нужно передавать flake
           };
         };
 
