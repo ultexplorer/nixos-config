@@ -1,4 +1,5 @@
-{ description = "NixOS configuration for ThinkPad T14";
+{
+  description = "NixOS configuration for ThinkPad T14";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -8,23 +9,30 @@
   };
 
   outputs = { self, nixpkgs, home-manager, flake-utils, ... }:
-  flake-utils.lib.eachDefaultSystem (system:
-    let
-      pkgs = import nixpkgs { inherit system; overlays = [ (import ./overlays/default.nix) ]; };
-    in
-    {
-      nixosConfigurations = {
-        t14 = pkgs.lib.nixosSystem {
+    flake-utils.lib.eachDefaultSystem (system:
+      let
+        pkgs = import nixpkgs {
           inherit system;
-          modules = [ ./hosts/t14/default.nix ];
+          overlays = [ (import ./overlays/default.nix) ];
         };
-      };
+      in
+      {
+        # Основная конфигурация NixOS
+        nixosConfigurations = {
+          t14 = pkgs.lib.nixosSystem {
+            inherit system;
+            modules = [
+              ./hosts/t14/default.nix
+            ];
+            configuration = {}; # optional
+          };
+        };
 
-      devShells.${system}.default = import ./devshells/default.nix { inherit pkgs; };
+        # DevShell
+        devShells.${system}.default = import ./devshells/default.nix { inherit pkgs; };
 
-      # Правильный выход для home-manager
-      packages.home-manager = home-manager.packages.${system}.home-manager;
-    }
-  );
-  
+        # Home-manager
+        packages.home-manager = home-manager.packages.${system}.home-manager;
+      }
+    );
 }
