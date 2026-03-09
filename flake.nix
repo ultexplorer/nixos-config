@@ -21,7 +21,7 @@
               ./hosts/t14/default.nix
             ];
             # specialArgs = { inherit inputs; }; <- удаляем или заменяем на self
-            specialArgs = { self; }; # <-- если нужно передавать flake
+            specialArgs = { inherit self; }; # <-- если нужно передавать flake
           };
         };
 
