@@ -24,7 +24,6 @@
             modules = [
               ./hosts/t14/default.nix
             ];
-            # configuration = {}; # опционально, не обязательно
           };
         };
 
