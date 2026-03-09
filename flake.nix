@@ -22,11 +22,8 @@
 
       devShells.${system}.default = import ./devshells/default.nix { inherit pkgs; };
 
-      # <--- Добавляем атрибут home-manager для nix run
-      home-manager = {
-        type = "app";
-        program = "${home-manager}/bin/home-manager";
-      };
+      # Правильный выход для home-manager
+      packages.home-manager = home-manager.packages.${system}.home-manager;
     }
   );
   
