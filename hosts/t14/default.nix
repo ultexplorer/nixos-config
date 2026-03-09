@@ -6,6 +6,7 @@ let
     ../modules/desktop/xfce.nix
     ../modules/desktop/wayfire.nix
   ];
+  hmConfig = import ../../home/home.nix
 in
 {
   # Имя хоста
