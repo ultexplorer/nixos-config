@@ -31,6 +31,7 @@
     playerctl   # Чтобы кнопки "пауза/плей" на наушниках работали
     mpv
     tree
+    psmisc
   ];
   
   # 1. Включаем Bluetooth
