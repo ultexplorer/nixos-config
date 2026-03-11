@@ -31,7 +31,7 @@
         }
       ];
     };
-    };
+#    };
 
     # Оставляем devShells, если они тебе нужны
     devShells.${system}.default = import ./devshells/default.nix { inherit pkgs; };
