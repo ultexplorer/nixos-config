@@ -58,7 +58,7 @@
   networking.networkmanager.enable = true;
   
   # Явно отключаем стандартный беспроводной демон, чтобы не мешался
-  networking.wireless.enable = false; 
+ # networking.wireless.enable = false; 
 
   # Добавляем твоего юзера в группу, чтобы он мог управлять сетью
   users.users.me.extraGroups = [ "networkmanager" "wheel" "video" ];
