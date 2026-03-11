@@ -27,4 +27,15 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   system.stateVersion = "23.11"; 
+
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+    extraPackages = with pkgs; [
+      amdvlk # Драйвер Vulkan от AMD
+      vaapiVdpau
+      libvdpau-va-gl
+    ];
+  };
+
 }
