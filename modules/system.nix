@@ -28,20 +28,33 @@
     pciutils # Чтобы смотреть железо через lspci
     usbutils # Чтобы видеть твою будущую клавиатуру через lsusb
   ];
+  
+  # 1. Включаем Bluetooth
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true; # Чтобы наушники цеплялись сразу при включении
+    settings = {
+      General = {
+        Enable = "Source,Sink,Media,Socket";
+        Experimental = true; # Помогает с отображением заряда батареи наушников
+      };
+    };
+  };
+  services.blueman.enable = true;
 
-   # 1. Сеть (NetworkManager)
-  networking.networkmanager.enable = true;
-
-  # 2. Bluetooth (Железо + Сервис)
-  hardware.bluetooth.enable = true; # Включает поддержку в ядре
-  services.blueman.enable = true;   # Включает менеджер (тот самый синий значок)
-
-  # 3. Звук (Pipewire — современный стандарт, отлично для Wayland)
+  # 2. Звук через Pipewire (необходим для современных наушников)
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
-    alsa.support32Bit = true;
     pulse.enable = true;
+    # Это позволит управлять звуком наушников через стандартные утилиты
   };
+
+  # 3. Утилиты для управления
+  environment.systemPackages = with pkgs; [
+    pavucontrol # Графический микшер (обязательно!)
+    playerctl   # Чтобы кнопки "пауза/плей" на наушниках работали
+  ];
+
 }
