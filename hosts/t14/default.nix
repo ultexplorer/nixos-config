@@ -4,7 +4,7 @@
   imports = [
     ./hardware-configuration.nix
     # Если у тебя AMD версия T14:
-    inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14-gen1-amd
+   # inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14-gen1-amd
   ];
 
   networking.hostName = "t14";
