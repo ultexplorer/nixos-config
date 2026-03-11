@@ -7,6 +7,8 @@
     ../../modules/desktop/common.nix # Общее для GUI (звук, видео)
     ../../modules/desktop/xfce.nix   # Конкретно оболочка XFCE
     ../../modules/users/me.nix
+    ../../modules/apps/easyeffects.nix
+    ../../modules/apps/chromium.nix
     # Если у тебя AMD версия T14:
     inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen2 # Вот этот модуль специально для тебя
   ];
