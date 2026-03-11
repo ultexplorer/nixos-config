@@ -7,7 +7,7 @@
     ../../modules/desktop/common.nix # Общее для GUI (звук, видео)
     ../../modules/desktop/xfce.nix   # Конкретно оболочка XFCE
     # Если у тебя AMD версия T14:
-   # inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14-gen1-amd
+    inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen2 # Вот этот модуль специально для тебя
   ];
 
   networking.hostName = "t14";
