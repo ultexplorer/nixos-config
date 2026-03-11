@@ -4,34 +4,30 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
-    home-manager.url = "github:nix-community/home-manager";
-    flake-utils.url = "github:numtide/flake-utils";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, flake-utils, ... }:
-    flake-utils.lib.eachDefaultSystem (system:
-      let
-        pkgs = import nixpkgs {
-          inherit system;
-          overlays = [ (import ./overlays/default.nix) ];
-        };
-      in
-      {
-        # Основная конфигурация NixOS
-        nixosConfigurations = {
-          t14 = pkgs.nixosSystem {
-            inherit system;
-            modules = [
-              ./hosts/t14/default.nix
-            ];
-          };
-        };
+  outputs = { self, nixpkgs, nixos-hardware, home-manager, ... }@inputs: 
+  let
+    system = "x86_64-linux";
+    pkgs = import nixpkgs {
+      inherit system;
+      config.allowUnfree = true;
+      # overlays = [ (import ./overlays/default.nix) ]; # Разблокируй, если файл уже есть
+    };
+  in {
+    nixosConfigurations.t14 = nixpkgs.lib.nixosSystem {
+      inherit system;
+      specialArgs = { inherit inputs; }; 
+      modules = [
+        ./hosts/t14/default.nix
+      ];
+    };
 
-        # DevShell для разработки
-        devShells.${system}.default = import ./devshells/default.nix { inherit pkgs; };
-
-        # Home-manager
-        packages.home-manager = home-manager.packages.${system}.home-manager;
-      }
-    );
+    # Оставляем devShells, если они тебе нужны
+    devShells.${system}.default = import ./devshells/default.nix { inherit pkgs; };
+  };
 }
