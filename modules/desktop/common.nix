@@ -17,7 +17,7 @@
     dejavu_fonts
     liberation_ttf
     noto-fonts
-    noto-fonts-emoji
+    noto-fonts-color-emoji
     font-awesome # Полезно для статус-баров в Niri/Wayfire
   ];
 
