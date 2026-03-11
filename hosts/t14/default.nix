@@ -13,7 +13,7 @@
   networking.hostName = "t14";
 
   # Здесь твои базовые настройки
-  time.timeZone = "Europe/Moscow"; # Или твой пояс
+  time.timeZone = "Europe/Berlin"; # Или твой пояс
   i18n.defaultLocale = "en_US.UTF-8";
 
   # Не забудь про юзера, чтобы не остаться снаружи!
