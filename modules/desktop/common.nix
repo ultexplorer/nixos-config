@@ -32,6 +32,6 @@
 
   # Display Manager (Экран входа)
   # GDM отлично понимает и X11 (XFCE), и Wayland (Niri/Wayfire)
-  services.xserver.displayManager.gdm.enable = true;
+  services.displayManager.gdm.enable = true;
 
 }
