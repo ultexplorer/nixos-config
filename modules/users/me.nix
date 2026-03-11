@@ -14,7 +14,6 @@
     home.stateVersion = "23.11";
 
     home.packages = with pkgs; [
-      chromium
       inter # Тот самый шрифт Inter из твоего конфига
       # Можно добавить другие GUI приложения здесь
     ];
