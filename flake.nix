@@ -19,12 +19,18 @@
       # overlays = [ (import ./overlays/default.nix) ]; # Разблокируй, если файл уже есть
     };
   in {
-    nixosConfigurations.t14 = nixpkgs.lib.nixosSystem {
+     nixosConfigurations.t14 = nixpkgs.lib.nixosSystem {
       inherit system;
-      specialArgs = { inherit inputs; }; 
+      specialArgs = { inherit inputs; };
       modules = [
         ./hosts/t14/default.nix
+        home-manager.nixosModules.home-manager # Добавляем эту строку
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+        }
       ];
+    };
     };
 
     # Оставляем devShells, если они тебе нужны

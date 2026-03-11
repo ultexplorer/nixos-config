@@ -1,14 +1,14 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
-  # Включаем XFCE
+  services.xserver.enable = true;
   services.xserver.desktopManager.xfce.enable = true;
 
-  # XFCE специфические пакеты
+  # Эти пакеты будут доступны в системе только когда включен этот модуль
   environment.systemPackages = with pkgs; [
-    xfce4
-    xfce4-terminal
-    thunar
-    mousepad
+    xfce.xfce4-whiskermenu-plugin
+    xfce.xfce4-pulseaudio-plugin
+    xfce.xfce4-terminal
+    papirus-icon-theme # Дублируем здесь или в me.nix, чтобы XFCE их видел
   ];
 }
