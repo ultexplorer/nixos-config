@@ -34,7 +34,8 @@
     enable32Bit = true;
     extraPackages = with pkgs; [
      # amdvlk # Драйвер Vulkan от AMD
-      vaapiVdpau
+     # vaapiVdpau
+      libva-vdpau-driver
       libvdpau-va-gl
     ];
   };
