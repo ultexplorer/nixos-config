@@ -1,33 +1,23 @@
+{ config, pkgs, inputs, ... }:
+
 {
-  description = "NixOS configuration for ThinkPad T14";
+  imports = [
+    ./hardware-configuration.nix
+    # Если у тебя AMD версия T14:
+    inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14-gen1-amd
+  ];
 
-  inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixos-hardware.url = "github:NixOS/nixos-hardware";
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+  networking.hostName = "t14";
+
+  # Здесь твои базовые настройки
+  time.timeZone = "Europe/Moscow"; # Или твой пояс
+  i18n.defaultLocale = "en_US.UTF-8";
+
+  # Не забудь про юзера, чтобы не остаться снаружи!
+  users.users.me = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" "networkmanager" ];
   };
 
-  outputs = { self, nixpkgs, nixos-hardware, home-manager, ... }@inputs: 
-  let
-    system = "x86_64-linux";
-    pkgs = import nixpkgs {
-      inherit system;
-      config.allowUnfree = true;
-      # overlays = [ (import ./overlays/default.nix) ]; # Разблокируй, если файл уже есть
-    };
-  in {
-    nixosConfigurations.t14 = nixpkgs.lib.nixosSystem {
-      inherit system;
-      specialArgs = { inherit inputs; }; 
-      modules = [
-        ./hosts/t14/default.nix
-      ];
-    };
-
-    # Оставляем devShells, если они тебе нужны
-    devShells.${system}.default = import ./devshells/default.nix { inherit pkgs; };
-  };
+  system.stateVersion = "23.11"; 
 }
