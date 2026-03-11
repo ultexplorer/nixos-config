@@ -1,20 +1,37 @@
 { config, pkgs, ... }:
 
 {
-  # Общие звуковые сервисы
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
+  # 1. Настройка звука (Pipewire — современный стандарт)
+  security.rtkit.enable = true; # Нужно для работы Pipewire с приоритетом
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    # Если хочешь использовать старые программы для JACK:
+    jack.enable = true;
+  };
 
-  # Pipewire для Wayland и мультимедиа
-  services.pipewire.enable = true;
-
-  # Общие шрифты
-  fonts.fonts = with pkgs; [
+  # 2. Шрифты (используем актуальный синтаксис)
+  fonts.packages = with pkgs; [
     dejavu_fonts
     liberation_ttf
+    noto-fonts
+    noto-fonts-emoji
+    font-awesome # Полезно для статус-баров в Niri/Wayfire
   ];
 
-  # Общие X11/Wayland настройки
+  # 3. Графический стек
   services.xserver.enable = true;
-  services.xserver.desktopManager.default = "none"; # среды подключаются через свои модули
+  
+  # Отключаем дефолтные "заглушки", чтобы они не мешали твоим XFCE или Wayfire
+  services.xserver.desktopManager.xterm.enable = false;
+  
+  # Чтобы работал Wayland-композитор, часто нужно включить это:
+  # programs.xwayland.enable = true;
+
+  # Display Manager (Экран входа)
+  # GDM отлично понимает и X11 (XFCE), и Wayland (Niri/Wayfire)
+  services.xserver.displayManager.gdm.enable = true;
+
 }

@@ -2,7 +2,10 @@
 
 {
   imports = [
-    ./hardware-configuration.nix
+     ./hardware-configuration.nix     # Железо конкретно этого ноута
+    ../../modules/system.nix           # База (шрифты, консоль, git)
+    ../../modules/desktop/common.nix # Общее для GUI (звук, видео)
+    ../../modules/desktop/xfce.nix   # Конкретно оболочка XFCE
     # Если у тебя AMD версия T14:
    # inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14-gen1-amd
   ];
