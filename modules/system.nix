@@ -28,4 +28,20 @@
     pciutils # Чтобы смотреть железо через lspci
     usbutils # Чтобы видеть твою будущую клавиатуру через lsusb
   ];
+
+   # 1. Сеть (NetworkManager)
+  networking.networkmanager.enable = true;
+
+  # 2. Bluetooth (Железо + Сервис)
+  hardware.bluetooth.enable = true; # Включает поддержку в ядре
+  services.blueman.enable = true;   # Включает менеджер (тот самый синий значок)
+
+  # 3. Звук (Pipewire — современный стандарт, отлично для Wayland)
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
 }
