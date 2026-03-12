@@ -85,4 +85,3 @@
   boot.loader.grub.configurationLimit = 7; # Если у тебя GRUB
   boot.loader.systemd-boot.configurationLimit = 7; # Если у тебя systemd-boot (стандарт для UEFI)
 }
-}
