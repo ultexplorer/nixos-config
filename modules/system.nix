@@ -6,7 +6,7 @@
   time.timeZone = lib.mkDefault "Europe/Berlin"
   # Настройка консоли (TTY)
   console = {
-    font = "ter-v32n"; 
+    font = "ter-v32n";
     packages = [ pkgs.terminus_font ];
     keyMap = "us";
   };
@@ -33,7 +33,7 @@
     psmisc
     libva-utils
   ];
-  
+ 
   # 1. Включаем Bluetooth
   hardware.bluetooth = {
     enable = true;
@@ -59,13 +59,13 @@
   # 3. Сеть
   # Включаем именно сервис, а не просто пакет
   networking.networkmanager.enable = true;
-  
+ 
   # Явно отключаем стандартный беспроводной демон, чтобы не мешался
- # networking.wireless.enable = false; 
+ # networking.wireless.enable = false;
 
   # Добавляем твоего юзера в группу, чтобы он мог управлять сетью
   users.users.me.extraGroups = [ "networkmanager" "wheel" "video" ];
-  
+ 
   nix = {
     settings = {
       # Автоматическая оптимизация хранилища (ищет дубликаты файлов и делает hard links)
