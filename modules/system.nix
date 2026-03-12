@@ -32,6 +32,7 @@
     mpv
     tree
     psmisc
+    libva-utils
   ];
   
   # 1. Включаем Bluetooth
