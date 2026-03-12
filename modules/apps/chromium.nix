@@ -1,8 +1,14 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+
+{
   home-manager.users.me = {
     programs.chromium = {
       enable = true;
-      # package = pkgs.chromium; # Эту строку можно закомментировать, если она есть
+      # Самый надежный способ для Home Manager
+      extensions = [
+        { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # uBlock Origin
+        { id = "omkfmpieigblcllmkgbflkikinpkhlkg"; } # enhanced-h264ify
+      ];
       commandLineArgs = [
         "--ignore-gpu-blocklist"
         "--ozone-platform-hint=auto"
