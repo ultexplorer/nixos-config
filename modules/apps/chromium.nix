@@ -16,6 +16,7 @@
 
       extensions = [
         { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # uBlock Origin (формат HM чуть другой)
+        { id = "omkfmpieigblcllmkgbflkikinpkhlkg"; } # enhanced-h264ify
       ];
     };
   };
