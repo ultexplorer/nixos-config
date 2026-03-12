@@ -3,7 +3,8 @@
 {
   # Локализация
   i18n.defaultLocale = "en_US.UTF-8";
-  time.timeZone = lib.mkDefault "Europe/Berlin";
+  time.timeZone = lib.mkDefault "Europe/Berlin"; # Была пропущена ;
+
   # Настройка консоли (TTY)
   console = {
     font = "ter-v32n";
@@ -16,7 +17,7 @@
     terminus_font
   ];
 
-  # Общие пакеты, которые нужны везде (даже на сервере)
+  # Общие пакеты
   environment.systemPackages = with pkgs; [
     vim
     mc
@@ -24,10 +25,10 @@
     wget
     curl
     htop
-    pciutils # Чтобы смотреть железо через lspci
-    usbutils # Чтобы видеть твою будущую клавиатуру через lsusb
-    pavucontrol # Графический микшер (обязательно!)
-    playerctl   # Чтобы кнопки "пауза/плей" на наушниках работали
+    pciutils
+    usbutils
+    pavucontrol
+    playerctl
     mpv
     tree
     psmisc
@@ -37,52 +38,43 @@
   # 1. Включаем Bluetooth
   hardware.bluetooth = {
     enable = true;
-    powerOnBoot = true; # Чтобы наушники цеплялись сразу при включении
+    powerOnBoot = true;
     settings = {
       General = {
         Enable = "Source,Sink,Media,Socket";
-        Experimental = true; # Помогает с отображением заряда батареи наушников
+        Experimental = true;
       };
     };
   };
   services.blueman.enable = true;
 
-  # 2. Звук через Pipewire (необходим для современных наушников)
+  # 2. Звук через Pipewire
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
     pulse.enable = true;
-    # Это позволит управлять звуком наушников через стандартные утилиты
   };
 
   # 3. Сеть
-  # Включаем именно сервис, а не просто пакет
   networking.networkmanager.enable = true;
- 
-  # Явно отключаем стандартный беспроводной демон, чтобы не мешался
- # networking.wireless.enable = false;
 
-  # Добавляем твоего юзера в группу, чтобы он мог управлять сетью
-  users.users.me.extraGroups = [ "networkmanager" "wheel" "video" ];
+  # Добавляем твоего юзера в группы
+  users.users.me.extraGroups = [ "networkmanager" "wheel" "video" "audio" ];
  
   nix = {
     settings = {
-      # Автоматическая оптимизация хранилища (ищет дубликаты файлов и делает hard links)
-      # Экономит кучу места, запускаясь при каждой сборке
       auto-optimise-store = true;
     };
 
     gc = {
-      automatic = true;      # Включаем автоматическую очистку
-      dates = "weekly";      # Запуск раз в неделю (можно "daily", если часто меняешь конфиг)
-      options = "--delete-older-than 7d"; # Удалять всё, что старше 7 дней
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
     };
   };
 
-  # Ограничение количества поколений в меню загрузки (Bootloader)
-  # Это именно то, о чем ты просил: чтобы в меню при включении не было гигантского списка
-  boot.loader.grub.configurationLimit = 7; # Если у тебя GRUB
-  boot.loader.systemd-boot.configurationLimit = 7; # Если у тебя systemd-boot (стандарт для UEFI)
-};
+  # Ограничение количества поколений в меню загрузки
+  boot.loader.grub.configurationLimit = 7;
+  boot.loader.systemd-boot.configurationLimit = 7;
 }
