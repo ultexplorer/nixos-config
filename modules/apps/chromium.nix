@@ -11,6 +11,7 @@
         "--enable-features=VaapiVideoDecoder,VaapiVideoEncoder" # Добавили Encoder
         "--enable-gpu-rasterization"
         "--enable-zero-copy"
+        "--enable-features=VaapiVideoDecoder,VaapiVideoEncoder,VaapiVideoDecodeLinuxGL"
       ];
 
       extensions = [
