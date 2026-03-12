@@ -3,7 +3,7 @@
 {
   # Локализация
   i18n.defaultLocale = "en_US.UTF-8";
-  time.timeZone = lib.mkDefault "Europe/Berlin"
+  time.timeZone = lib.mkDefault "Europe/Berlin";
   # Настройка консоли (TTY)
   console = {
     font = "ter-v32n";
