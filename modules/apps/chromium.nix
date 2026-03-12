@@ -8,7 +8,7 @@
       commandLineArgs = [
         "--ignore-gpu-blocklist"
         "--ozone-platform-hint=auto"
-        "--enable-features=VaapiVideoDecoder,VaapiVideoEncoder" # Добавили Encoder
+       # "--enable-features=VaapiVideoDecoder,VaapiVideoEncoder" # Добавили Encoder
         "--enable-gpu-rasterization"
         "--enable-zero-copy"
         "--enable-features=VaapiVideoDecoder,VaapiVideoEncoder,VaapiVideoDecodeLinuxGL"
