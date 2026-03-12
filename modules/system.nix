@@ -66,6 +66,16 @@
 
   # Добавляем твоего юзера в группу, чтобы он мог управлять сетью
   users.users.me.extraGroups = [ "networkmanager" "wheel" "video" ];
+  
 
+  programs.chromium = {
+    enable = true;
+    extraOpts = {
+      "ExtensionInstallForcelist" = [
+        "cjpalhdlnbpafiamejdnhcphjbkeiagm;https://clients2.google.com/service/update2/crx"
+        "omkfmpieigblcllmkgbflkikinpkhlkg;https://clients2.google.com/service/update2/crx"
+      ];
+    };
+  };
 
 }

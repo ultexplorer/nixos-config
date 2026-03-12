@@ -1,11 +1,8 @@
-{ pkgs, ... }:
-
-{
+{ pkgs, ... }: {
   home-manager.users.me = {
     programs.chromium = {
       enable = true;
-      
-      # 1. Твои очищенные флаги (без дублей)
+      # package = pkgs.chromium; # Эту строку можно закомментировать, если она есть
       commandLineArgs = [
         "--ignore-gpu-blocklist"
         "--ozone-platform-hint=auto"
@@ -13,14 +10,6 @@
         "--enable-zero-copy"
         "--enable-features=VaapiVideoDecoder,VaapiVideoEncoder,VaapiVideoDecodeLinuxGL,CanvasOopRasterization"
       ];
-
-      # 2. Силовой метод установки (через политики Google)
-      extraOpts = {
-        "ExtensionInstallForcelist" = [
-          "cjpalhdlnbpafiamejdnhcphjbkeiagm;https://clients2.google.com/service/update2/crx"
-          "omkfmpieigblcllmkgbflkikinpkhlkg;https://clients2.google.com/service/update2/crx"
-        ];
-      };
     };
   };
 }
