@@ -1,10 +1,9 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   # Локализация
   i18n.defaultLocale = "en_US.UTF-8";
-  time.timeZone = "Europe/Berlin"; # Настрой под себя
-
+  time.timeZone = lib.mkDefault "Europe/Berlin"
   # Настройка консоли (TTY)
   console = {
     font = "ter-v32n"; 
@@ -66,5 +65,24 @@
 
   # Добавляем твоего юзера в группу, чтобы он мог управлять сетью
   users.users.me.extraGroups = [ "networkmanager" "wheel" "video" ];
+  
+  nix = {
+    settings = {
+      # Автоматическая оптимизация хранилища (ищет дубликаты файлов и делает hard links)
+      # Экономит кучу места, запускаясь при каждой сборке
+      auto-optimise-store = true;
+    };
 
+    gc = {
+      automatic = true;      # Включаем автоматическую очистку
+      dates = "weekly";      # Запуск раз в неделю (можно "daily", если часто меняешь конфиг)
+      options = "--delete-older-than 7d"; # Удалять всё, что старше 7 дней
+    };
+  };
+
+  # Ограничение количества поколений в меню загрузки (Bootloader)
+  # Это именно то, о чем ты просил: чтобы в меню при включении не было гигантского списка
+  boot.loader.grub.configurationLimit = 7; # Если у тебя GRUB
+  boot.loader.systemd-boot.configurationLimit = 7; # Если у тебя systemd-boot (стандарт для UEFI)
+}
 }
