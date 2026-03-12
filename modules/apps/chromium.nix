@@ -4,20 +4,23 @@
   home-manager.users.me = {
     programs.chromium = {
       enable = true;
-      # Теперь эта опция будет видна, так как она внутри Home Manager
+      
+      # 1. Твои очищенные флаги (без дублей)
       commandLineArgs = [
         "--ignore-gpu-blocklist"
         "--ozone-platform-hint=auto"
-       # "--enable-features=VaapiVideoDecoder,VaapiVideoEncoder" # Добавили Encoder
         "--enable-gpu-rasterization"
         "--enable-zero-copy"
-        "--enable-features=VaapiVideoDecoder,VaapiVideoEncoder,VaapiVideoDecodeLinuxGL"
+        "--enable-features=VaapiVideoDecoder,VaapiVideoEncoder,VaapiVideoDecodeLinuxGL,CanvasOopRasterization"
       ];
 
-      extensions = [
-        "cjpalhdlnbpafiamejdnhcphjbkeiagm" # uBlock Origin (формат HM чуть другой)
-        "omkfmpieigblcllmkgbflkikinpkhlkg" # enhanced-h264ify
-      ];
+      # 2. Силовой метод установки (через политики Google)
+      extraOpts = {
+        "ExtensionInstallForcelist" = [
+          "cjpalhdlnbpafiamejdnhcphjbkeiagm;https://clients2.google.com/service/update2/crx"
+          "omkfmpieigblcllmkgbflkikinpkhlkg;https://clients2.google.com/service/update2/crx"
+        ];
+      };
     };
   };
 }
