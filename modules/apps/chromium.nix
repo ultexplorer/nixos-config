@@ -15,8 +15,8 @@
       ];
 
       extensions = [
-        { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # uBlock Origin (формат HM чуть другой)
-        { id = "omkfmpieigblcllmkgbflkikinpkhlkg"; } # enhanced-h264ify
+        "cjpalhdlnbpafiamejdnhcphjbkeiagm" # uBlock Origin (формат HM чуть другой)
+        "omkfmpieigblcllmkgbflkikinpkhlkg" # enhanced-h264ify
       ];
     };
   };
