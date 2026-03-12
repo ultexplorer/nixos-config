@@ -1,6 +1,7 @@
 { pkgs, ... }:
 
 {
+    
   # 1. Системные зависимости для звуковых эффектов
   environment.systemPackages = with pkgs; [
     easyeffects
