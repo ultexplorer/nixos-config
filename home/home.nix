@@ -5,6 +5,7 @@
     ./gui/xfce.nix
     ./gui/wayfire.nix
     ./gui/firefox.nix
+    ./gui/foot.nix
     ./cli/shell.nix
 #    ./cli/neovim.nix
  #   ./tty/console.nix
@@ -23,6 +24,12 @@
       mkhl.direnv
     ];
   };
+  # Foot -----------------------------------#
+  programs.foot = {
+    enable = true;
+
+  };
+  ###########################################
 
   # Автозапуск EasyEffects в фоне
   services.easyeffects.enable = true;
