@@ -1,51 +1,21 @@
 { pkgs, ... }:
 
 {
-  # 1. Основные службы графики
   services.xserver = {
     enable = true;
-    # Настройка раскладки (сделай под себя, если нужно)
-    xkb.layout = "us,ru";
-    xkb.options = "grp:alt_shift_toggle";
-    
-    # Включаем XFCE на системном уровне
     desktopManager.xfce.enable = true;
+    # Это заставит систему "увидеть" сессию, даже если она капризничает
+    displayManager.sessionPackages = [ pkgs.xfce.xfce4-session ];
   };
 
-  # 2. Исправляем ошибку "NameHasNoOwner" из dbus-monitor
-  # Порталы нужны, чтобы XFCE мог общаться с системой (темы, файлы, диалоги)
-  xdg.portal = {
-    enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-    config.common.default = "gtk";
-  };
-
-  # 3. "Нервная система" (D-Bus) и системные службы
-  services.dbus.enable = true;
-  
-  # Чтобы в XFCE работали флешки, корзина и управление питанием
-  services.gvfs.enable = true;    # Монтирование дисков
-  services.tumbler.enable = true; # Превью картинок в Thunar
-  services.upower.enable = true;  # Индикатор батареи и сон
-  
-  # Позволяет менять настройки яркости и звука без sudo
-  security.polkit.enable = true;
-
-  # 4. Шрифты (чтобы интерфейс XFCE не выглядел как каша из квадратиков)
-  fonts.packages = with pkgs; [
-    noto-fonts
-    noto-fonts-color-emoji
-    liberation_ttf
-    fira-code
-    jetbrains-mono
-  ];
-
-  # 5. Добавляем системные пакеты, специфичные для XFCE
+  # Добавляем сам пакет сессии в систему принудительно
   environment.systemPackages = with pkgs; [
-    xfce4-pulseaudio-plugin # Громкость на панели
-    xfce4-netload-plugin    # Монитор сети
-    thunar-archive-plugin   # Работа с архивами
-    pavucontrol                  # Настройка звука
-    brightnessctl                        # Управление подсветкой
+    xfce.xfce4-session
+    xfce.xfce4-settings
+    xfce.xfce4-panel
+    xfce.xfconf
   ];
+
+  # Даем знать greetd, что X11 сессии лежат тут
+  services.displayManager.sessionData.dirs = [ "${pkgs.xfce.xfce4-session}/share/xsessions" ];
 }
