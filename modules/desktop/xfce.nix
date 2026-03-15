@@ -1,15 +1,26 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 
 {
-  services.xserver.enable = true;
-  services.xserver.desktopManager.xfce.enable = true;
- services.xserver.displayManager.lightdm.enable = false;
+  # 1. Включаем сам X-сервер и XFCE
+  services.xserver = {
+    enable = true;
+    desktopManager.xfce.enable = true;
+    displayManager.lightdm.enable = true; # Или твой greetd/tuigreet
+  };
 
-  # Эти пакеты будут доступны в системе только когда включен этот модуль
-  environment.systemPackages = with pkgs; [
-    xfce4-whiskermenu-plugin
-    xfce4-pulseaudio-plugin
-    xfce4-terminal
-    papirus-icon-theme # Дублируем здесь или в me.nix, чтобы XFCE их видел
-  ];
+  # 2. Настраиваем порталы (то, на что ругался dbus-monitor)
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    config.common.default = "gtk";
+  };
+
+  # 3. Важные системные службы для связи компонентов
+  services.dbus.enable = true;
+  
+  # Это поможет XFCE управлять питанием и монтировать диски
+  services.upower.enable = true;
+  services.gvfs.enable = true; # Для работы с файлами и корзиной
+  services.tumbler.enable = true; # Для превью картинок
 }
+

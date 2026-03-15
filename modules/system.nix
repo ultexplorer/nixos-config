@@ -78,4 +78,6 @@
   # Ограничение количества поколений в меню загрузки
   boot.loader.grub.configurationLimit = 7;
   boot.loader.systemd-boot.configurationLimit = 7;
+
+
 }
