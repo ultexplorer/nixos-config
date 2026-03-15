@@ -73,7 +73,7 @@
 
   environment.systemPackages = with pkgs; [
     foot
-    greetd.tuigreet
+    tuigreet
     # Добавь сюда xterm на всякий случай, если всё упадет — будет запасной выход
     xterm 
   ];

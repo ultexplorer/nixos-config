@@ -42,10 +42,10 @@
 
   # 5. Добавляем системные пакеты, специфичные для XFCE
   environment.systemPackages = with pkgs; [
-    xfce.xfce4-pulseaudio-plugin # Громкость на панели
-    xfce.xfce4-netload-plugin    # Монитор сети
-    xfce.thunar-archive-plugin   # Работа с архивами
+    xfce4-pulseaudio-plugin # Громкость на панели
+    xfce4-netload-plugin    # Монитор сети
+    thunar-archive-plugin   # Работа с архивами
     pavucontrol                  # Настройка звука
-    light                        # Управление подсветкой
+    brightnessctl                        # Управление подсветкой
   ];
 }
