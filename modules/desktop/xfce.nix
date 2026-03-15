@@ -34,7 +34,7 @@
   # 4. Шрифты (чтобы интерфейс XFCE не выглядел как каша из квадратиков)
   fonts.packages = with pkgs; [
     noto-fonts
-    noto-fonts-emoji
+    noto-fonts-color-emoji
     liberation_ttf
     fira-code
     jetbrains-mono
