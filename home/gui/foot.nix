@@ -1,3 +1,6 @@
+{ pkgs, ... }:
+
+{
 settings = {
   main = {
     font = "monospace:size=16";
@@ -10,5 +13,6 @@ settings = {
     size = 20;
     color = "ff002b36"; # Цвет заголовка (темно-синий)
   };
+};
 }
 
