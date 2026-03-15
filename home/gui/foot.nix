@@ -1,14 +1,14 @@
-{ pkgs, ... }:
-
-{
-   programs.foot = {
-   enable = true;
-   settings = {
-    main = {
-         font = "monospace:size=16";  
-       };
-     };
-
+settings = {
+  main = {
+    font = "monospace:size=16";
+    # Позволяет терминалу подстраиваться под размер окна
+    resize-delay-ms = 100; 
   };
-
+  # Добавляем рамки окна (если оконный менеджер их не дает)
+  csd = {
+    preferred = "server"; # Позволяет системе рисовать заголовок окна
+    size = 20;
+    color = "ff002b36"; # Цвет заголовка (темно-синий)
+  };
 }
+
