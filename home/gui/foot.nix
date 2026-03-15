@@ -1,18 +1,25 @@
-{ pkgs, ... }:
+{ pkgs, ... }: # <-- Эта строка ОБЯЗАТЕЛЬНА
 
 {
-settings = {
-  main = {
-    font = "monospace:size=16";
-    # Позволяет терминалу подстраиваться под размер окна
-    resize-delay-ms = 100; 
+  programs.foot = {
+    enable = true;
+    settings = {
+      main = {
+        font = "monospace:size=16";
+        initial-window-size-chars = "120x30";
+        pad-to-center = "yes";
+      };
+      # CSD (Client Side Decorations) добавляет кнопки окна и рамку
+      csd = {
+        preferred = "server";
+        size = 20;
+      };
+      pad = {
+        padding-left = 20;
+        padding-right = 20;
+        padding-top = 10;
+        padding-bottom = 10;
+      };
+    };
   };
-  # Добавляем рамки окна (если оконный менеджер их не дает)
-  csd = {
-    preferred = "server"; # Позволяет системе рисовать заголовок окна
-    size = 20;
-    color = "ff002b36"; # Цвет заголовка (темно-синий)
-  };
-};
 }
-
