@@ -39,7 +39,7 @@
     enable = true;
     settings = {
       default_session = {
-       command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --user-menu --cmd 'dbus-run-session startxfce4' /run/current-system/sw/bin/startxfce4";
+       command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --user-menu --cmd 'dbus-run-session startxfce4'";
       };
     };
   };
