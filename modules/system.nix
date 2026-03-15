@@ -1,6 +1,7 @@
 { pkgs, lib, ... }:
 
 {
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   # Локализация
   i18n.defaultLocale = "en_US.UTF-8";
   time.timeZone = lib.mkDefault "Europe/Berlin"; # Была пропущена ;
