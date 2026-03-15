@@ -26,6 +26,10 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.initrd.kernelModules = [ "amdgpu" ];
+  
+  # Параметры ядра для стабильности Ryzen (против ребутов)
+  boot.kernelParams = [ "processor.max_cstate=1" "amdgpu.sg_display=0" ];
+
   system.stateVersion = "23.11";
 
   # Графика AMD
@@ -34,39 +38,44 @@
     enable32Bit = true;
   };
 
-  # ВХОД (Минимализм)
+  # ВХОД через greetd
   services.greetd = {
     enable = true;
     settings = {
       default_session = {
-       command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --user-menu --cmd 'dbus-run-session startxfce4'";
+        # Запускаем tuigreet. Мы убрали жесткий dbus-run-session, 
+        # так как он теперь настроен внутри модуля xfce.nix
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --user-menu --cmd startxfce4";
+        user = "greeter";
       };
     };
   };
 
-  # Wayfire и ввод
+  # Wayfire (оставляем как альтернативу)
   programs.wayfire = {
     enable = true;
     plugins = with pkgs.wayfirePlugins; [ wcm wf-shell wayfire-plugins-extra ];
   };
 
   services.libinput.enable = true;
+  
+  # Настройки клавиатуры (дублируем для надежности)
   services.xserver.xkb = {
     layout = "us,ru";
     options = "grp:alt_shift_toggle";
   };
 
-  # Переменные для Chromium и Wayland
+  # ВАЖНО: Мы убрали глобальные переменные Wayland, 
+  # чтобы они не ломали XFCE.
   environment.sessionVariables = {
-    NIXOS_OZONE_WL = "1";
-    XDG_CURRENT_DESKTOP = "Wayfire";
-    XDG_SESSION_TYPE = "wayland";
-    GDK_BACKEND = "wayland";
+    # NIXOS_OZONE_WL = "1"; # Включишь потом только для Wayland-сессии
   };
 
   environment.systemPackages = with pkgs; [
     foot
     greetd.tuigreet
+    # Добавь сюда xterm на всякий случай, если всё упадет — будет запасной выход
+    xterm 
   ];
 
   # Батарея
