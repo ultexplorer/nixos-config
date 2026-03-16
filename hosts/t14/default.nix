@@ -57,6 +57,7 @@
     foot              # терминал (для Wayfire/Sway)
     tree
     firefox
+    xorg.xinit
   ];
 
   # === ПОЛЬЗОВАТЕЛЬ GREETER (для корректной работы Wayland) ===
