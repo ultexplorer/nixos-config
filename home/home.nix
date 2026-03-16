@@ -17,6 +17,7 @@
 
   home.packages = with pkgs; [
     htop
+    git
   ];
 
   home.sessionVariables = {

@@ -31,9 +31,6 @@
         command = ''
           ${pkgs.greetd.tuigreet}/bin/tuigreet \
          --remember \
-         --remember-user-session \
-         --sessions /run/current-system/sw/share/xsessions \
-         --environments /etc/greetd/environments
         '';
         user = "greeter";
       };
