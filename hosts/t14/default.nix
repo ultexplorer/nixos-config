@@ -29,8 +29,7 @@
     settings = {
       default_session = {
         command = ''
-          ${pkgs.greetd.tuigreet}/bin/tuigreet \
-         --remember \
+          ${pkgs.greetd.tuigreet}/bin/tuigreet 
         '';
         user = "greeter";
       };
