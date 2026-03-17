@@ -42,7 +42,7 @@
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "video" "input" "render" ];  # video/input могут понадобиться
   };
-  hardware.backlight = { 
+  hardware.acpilight = { 
                enable = true; 
     };
 
