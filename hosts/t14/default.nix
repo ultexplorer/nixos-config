@@ -12,6 +12,7 @@
 
   # === ВКЛЮЧАЕМ X11 И XFCE ===
   services.xserver = {
+    displayManager.lightd.enable = false;
     enable = true;
     desktopManager.xfce = {
       enable = true;
@@ -29,7 +30,7 @@
     settings = {
       default_session = {
         command = ''
-          ${pkgs.greetd.tuigreet}/bin/tuigreet 
+          ${pkgs.greetd.tuigreet}/bin/tuigreet --sessions /etc/greetd/environments 
         '';
         user = "greeter";
       };
@@ -39,9 +40,9 @@
   # === СПИСОК СЕССИЙ (Wayfire и другие) ===
   environment.etc."greetd/environments".text = ''
     # Wayland
-    wayfire
+    # wayfire
     # dbus-launch wayfire  # если потребуется
-
+    xfce4-session
     # Можно добавить другие:
     # sway
     # bash (для отладки)
