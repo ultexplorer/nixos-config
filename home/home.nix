@@ -27,5 +27,9 @@
   };
 
   programs.home-manager.enable = true;
+
+  home.file.".xinitrc".text = ''
+      exec xfce4-session
+     '';
 }
 

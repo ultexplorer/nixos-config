@@ -23,7 +23,7 @@
     };
     # Для XFCE этого достаточно, displayManager не трогаем
   };
-
+  services.libinput.enable = true;
   # === НАСТРАИВАЕМ GREETD (текстовый вход) ===
 
   # === СПИСОК СЕССИЙ (Wayfire и другие) ===
@@ -68,7 +68,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.initrd.kernelModules = [ "amdgpu" ];
   # Фикс для графики AMD Ryzen (ThinkPad T14)
-  boot.kernelParams = [ "amdgpu.sg_display=0" ]; 
+  boot.kernelParams = [ "amdgpu.sg_display=0" "acpi_backlight=native" ]; 
   
   system.stateVersion = "24.11";
 
