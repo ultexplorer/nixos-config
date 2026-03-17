@@ -20,7 +20,7 @@
       # extraSessionCommands = ''
       #   export XDG_CURRENT_DESKTOP=XFCE
       # '';
-    modules = [ pkgs.xorg.xf86InputLibinput ];
+    modules = [ pkgs.xorg.xf86inputlibinput ];
     };
     # Для XFCE этого достаточно, displayManager не трогаем
   };
