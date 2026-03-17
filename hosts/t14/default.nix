@@ -25,50 +25,17 @@
   };
 
   # === НАСТРАИВАЕМ GREETD (текстовый вход) ===
-  services.greetd = {
-    enable = true;
-    settings = {
-      default_session = {
-        command = ''
-          ${pkgs.greetd.tuigreet}/bin/tuigreet --sessions /etc/greetd/environments 
-        '';
-        user = "greeter";
-      };
-    };
-  };
 
   # === СПИСОК СЕССИЙ (Wayfire и другие) ===
-  environment.etc."greetd/environments".text = ''
-    # Wayland
-    # wayfire
-    # dbus-launch wayfire  # если потребуется
-    xfce4-session
-    # Можно добавить другие:
-    # sway
-    # bash (для отладки)
-  '';
 
   # === УСТАНАВЛИВАЕМ ПАКЕТЫ ===
   environment.systemPackages = with pkgs; [
-    greetd.tuigreet   # текстовый интерфейс входа
-    wayfire           # Wayland-композитор
-    wofi              # лаунчер для Wayfire (опционально)
-    swaylock          # блокировка экрана (опционально)
-    foot              # терминал (для Wayfire/Sway)
     tree
     firefox
     xorg.xinit
   ];
 
   # === ПОЛЬЗОВАТЕЛЬ GREETER (для корректной работы Wayland) ===
-  users.users.greeter = {
-    isSystemUser = true;
-    group = "greeter";
-    home = "/var/lib/greetd";
-    createHome = true;
-    extraGroups = [ "video" "input" ];  # нужны для доступа к устройствам
-  };
-  users.groups.greeter = {};
 
   # === ТВОЙ ПОЛЬЗОВАТЕЛЬ (замени "твой_пользователь" на реальное имя) ===
   users.users.me = {
