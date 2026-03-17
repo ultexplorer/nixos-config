@@ -13,6 +13,7 @@
   # === ВКЛЮЧАЕМ X11 И XFCE ===
   services.xserver = {
     displayManager.lightdm.enable = false;
+    displayManager.startx.enable = true;
     enable = true;
     desktopManager.xfce = {
       enable = true;
@@ -24,7 +25,7 @@
     # Для XFCE этого достаточно, displayManager не трогаем
   };
   services.libinput.enable = true;
-  
+  services.dbus.enable = true;
   # === НАСТРАИВАЕМ GREETD (текстовый вход) ===
 
   # === СПИСОК СЕССИЙ (Wayfire и другие) ===

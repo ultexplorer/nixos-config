@@ -36,7 +36,7 @@
     unset f
   fi
 
-  exec startxfce4     '';
+  exec dbus-run-session startxfce4     '';
   home.shellAliases = {
    bright = ''
      sudo bash -c "echo 64764 > /sys/class/backlight/amdgpu_bl1/brightness"
