@@ -12,7 +12,7 @@
 
   # === ВКЛЮЧАЕМ X11 И XFCE ===
   services.xserver = {
-    displayManager.lightd.enable = false;
+    displayManager.lightdm.enable = false;
     enable = true;
     desktopManager.xfce = {
       enable = true;
