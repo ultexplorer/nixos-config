@@ -29,8 +29,14 @@
   programs.home-manager.enable = true;
 
   home.file.".xinitrc".text = ''
-      exec xfce4-session
-     '';
+     if [ -d /etc/X11/xinit/xinitrc.d ] ; then
+        for f in /etc/X11/xinit/xinitrc.d/?*.sh ; do
+        [ -x "$f" ] && . "$f"
+        done
+    unset f
+  fi
+
+  exec startxfce4     '';
   home.shellAliases = {
    bright = ''
      sudo bash -c "echo 64764 > /sys/class/backlight/amdgpu_bl1/brightness"
