@@ -31,5 +31,10 @@
   home.file.".xinitrc".text = ''
       exec xfce4-session
      '';
+  home.shellAliases = {
+   bright = ''
+     sudo bash -c "echo 64764 > /sys/class/backlight/amdgpu_bl1/brightness"
+   '';
+};
 }
 
