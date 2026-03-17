@@ -20,10 +20,12 @@
       # extraSessionCommands = ''
       #   export XDG_CURRENT_DESKTOP=XFCE
       # '';
+    modules = [ pkgs.xorg.xf86InputLibinput ];
     };
     # Для XFCE этого достаточно, displayManager не трогаем
   };
   services.libinput.enable = true;
+  
   # === НАСТРАИВАЕМ GREETD (текстовый вход) ===
 
   # === СПИСОК СЕССИЙ (Wayfire и другие) ===
