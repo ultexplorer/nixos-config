@@ -42,7 +42,9 @@
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "video" "input" "render" ];  # video/input могут понадобиться
   };
-  hardware.backlight = { enable = true;  };
+  hardware.backlight = { 
+               enable = true; 
+    };
 
   # Остальные твои системные настройки...
    # Поддержка графики (нужна даже для XFCE на AMD)
